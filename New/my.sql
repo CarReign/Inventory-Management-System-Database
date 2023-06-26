@@ -63,33 +63,33 @@ CREATE TABLE IF NOT EXISTS stocks (
 
 -- -------------------------  VIEWS  ------------------------- --
 
-CREATE OR REPLACE VIEW view_stocks 
-AS SELECT 
-    stocks.quantity AS `Stock Quantity`, 
-    stocks.expiration_date AS `Stock Expiration Date`, 
-    stocks.sell_price AS `Stock Selling Price`, 
-    stocks.buy_price AS `Stock Buying Price`, 
-    products.product_name AS `Product`,
-    products.product_description AS `Product Description`,
-    categories.category_name AS `Category`,
-    categories.category_description AS `Category Description`,
-    stocks.stock_id, 
-    stocks.purchase_id, 
+CREATE OR REPLACE VIEW view_stocks AS
+SELECT
+    stocks.quantity AS "Stock Quantity",
+    stocks.expiration_date AS "Stock Expiration Date",
+    stocks.sell_price AS "Stock Selling Price",
+    stocks.buy_price AS "Stock Buying Price",
+    products.product_name AS "Product",
+    products.product_description AS "Product Description",
+    categories.category_name AS "Category",
+    categories.category_description AS "Category Description",
+    stocks.stock_id,
+    stocks.purchase_id,
     stocks.product_id
 FROM stocks
 INNER JOIN products ON stocks.product_id = products.product_id
 INNER JOIN categories ON products.category_id = categories.category_id;
 
-CREATE OR REPLACE VIEW view_old_stocks
-AS SELECT
-    stocks.quantity AS `Stock Quantity`,
-    stocks.expiration_date AS `Stock Expiration Date`,
-    stocks.sell_price AS `Stock Selling Price`,
-    stocks.buy_price AS `Stock Buying Price`,
-    products.product_name AS `Product`,
-    products.product_description AS `Product Description`,
-    categories.category_name AS `Category`,
-    categories.category_description AS `Category Description`,
+CREATE OR REPLACE VIEW view_old_stocks AS
+SELECT
+    stocks.quantity AS "Stock Quantity",
+    stocks.expiration_date AS "Stock Expiration Date",
+    stocks.sell_price AS "Stock Selling Price",
+    stocks.buy_price AS "Stock Buying Price",
+    products.product_name AS "Product",
+    products.product_description AS "Product Description",
+    categories.category_name AS "Category",
+    categories.category_description AS "Category Description",
     stocks.stock_id,
     stocks.purchase_id,
     stocks.product_id
@@ -98,28 +98,28 @@ INNER JOIN products ON stocks.product_id = products.product_id
 INNER JOIN categories ON products.category_id = categories.category_id
 WHERE stocks.expiration_date < CURRENT_DATE;
 
-CREATE OR REPLACE VIEW view_purchases
-AS SELECT
-    purchase_info.purchase_id AS `Purchase No`,
-    purchase_info.product_id AS `Product ID`,
-    purchase_info.supplier_id AS `Supplier ID`,
-    purchase_info.purchase_date AS `Purchase Date`,
-    purchase_info.ordered_quantity AS `Ordered Quantity`,
-    purchase_info.is_approved AS `Is Approved`,
-    purchase_info.status AS `Status`,
-    products.product_name AS `Product`,
-    products.product_description AS `Product Description`,
-    categories.category_name AS `Category`,
-    categories.category_description AS `Category Description`
+CREATE OR REPLACE VIEW view_purchases AS
+SELECT
+    purchase_info.purchase_id AS "Purchase No",
+    purchase_info.product_id AS "Product ID",
+    purchase_info.supplier_id AS "Supplier ID",
+    purchase_info.purchase_date AS "Purchase Date",
+    purchase_info.ordered_quantity AS "Ordered Quantity",
+    purchase_info.is_approved AS "Is Approved",
+    purchase_info.status AS "Status",
+    products.product_name AS "Product",
+    products.product_description AS "Product Description",
+    categories.category_name AS "Category",
+    categories.category_description AS "Category Description"
 FROM purchase_info
 INNER JOIN products ON purchase_info.product_id = products.product_id
 INNER JOIN categories ON products.category_id = categories.category_id;
 
-CREATE OR REPLACE VIEW view_suppliers
-AS SELECT 
-    suppliers.supplier_id AS `Supplier ID`,
-    suppliers.supplier_name AS `Supplier Name`,
-    suppliers.phone_number AS `Phone Number`
+CREATE OR REPLACE VIEW view_suppliers AS
+SELECT
+    suppliers.supplier_id AS "Supplier ID",
+    suppliers.supplier_name AS "Supplier Name",
+    suppliers.phone_number AS "Phone Number"
 FROM suppliers
 INNER JOIN products ON suppliers.supplier_id = products.supplier_id
 INNER JOIN categories ON products.category_id = categories.category_id
@@ -145,13 +145,13 @@ DELIMITER ;
 
 -- -------------------------  PROCEDURES  ------------------------- --
 
-DROP PROCEDURE IF EXISTS add_category; -- done
-DROP PROCEDURE IF EXISTS approve_purchase; -- done
-DROP PROCEDURE IF EXISTS add_product; -- done
-DROP PROCEDURE IF EXISTS add_supplier; -- done
-DROP PROCEDURE IF EXISTS update_supplier; -- done
-DROP PROCEDURE IF EXISTS add_purchase_product; -- done
-DROP PROCEDURE IF EXISTS add_stock_details; -- 
+DROP PROCEDURE IF EXISTS add_category; 
+DROP PROCEDURE IF EXISTS approve_purchase; 
+DROP PROCEDURE IF EXISTS add_product; 
+DROP PROCEDURE IF EXISTS add_supplier; 
+DROP PROCEDURE IF EXISTS update_supplier; 
+DROP PROCEDURE IF EXISTS add_purchase_product; 
+DROP PROCEDURE IF EXISTS add_stock_details; 
 
 DELIMITER //
 CREATE PROCEDURE IF NOT EXISTS add_category(
@@ -371,6 +371,7 @@ BEGIN
     
     RETURN average;
 END //
+DELIMITER ;
 
 -- -------------------------  VIEW  ------------------------- --
 
